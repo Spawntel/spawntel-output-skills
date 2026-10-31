@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Document title</title>
+<style>
+/*FONT*/
+:root{
+  --paper:#FFFFFF;
+  --ink:#121214;
+  --body:#2A2A2E;
+  --soft:#F3F2F7;
+  --soft2:#E9E6F3;
+  --violet:#6700FF;
+  --violet-ink:#4B00BA;
+  --warn:#FFF4D6;
+  --warn-ink:#5C4300;
+  --font:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@page{size:A4;margin:16mm 15mm 18mm}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--body);font-family:var(--font);font-size:11pt;line-height:1.55;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+main{max-width:180mm;margin:0 auto;padding:0 4mm}
+h1,h2,h3{color:var(--ink);margin:0;letter-spacing:-0.03em;line-height:1.1}
+p{margin:0 0 10px}
+b{color:var(--ink)}
+.s{color:var(--violet);font-weight:700;font-size:8pt;vertical-align:super;line-height:0;margin-left:1px}
+
+.cover{min-height:255mm;display:flex;flex-direction:column;justify-content:center;break-after:page}
+.cover .pill{align-self:flex-start}
+.cover h1{font-size:44pt;font-weight:700;letter-spacing:-0.05em;margin-top:18px;max-width:13ch}
+.cover .sub{font-size:15pt;margin-top:20px;max-width:34ch}
+.cover .promise{margin-top:44px;background:var(--soft);border-radius:18px;padding:20px 22px;font-size:11.5pt;max-width:120mm}
+.cover .promise b{display:block;margin-bottom:4px}
+
+.pill{display:inline-block;background:var(--violet);color:#fff;font-weight:700;font-size:9pt;letter-spacing:.16em;text-transform:uppercase;padding:6px 13px;border-radius:999px}
+.pill.grey{background:var(--ink)}
+
+.part{padding-top:6px;margin-top:26px}
+.part.newpage{break-before:page;margin-top:0}
+.keep{break-inside:avoid}
+.part h2{font-size:24pt;font-weight:700;margin-top:12px;margin-bottom:12px;max-width:22ch}
+.part h3{font-size:14pt;margin-top:18px}
+.lead{font-size:12.5pt;color:var(--ink);max-width:62ch;margin-bottom:14px}
+ul.pts{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:8px}
+ul.pts li{position:relative;padding-left:18px;max-width:64ch}
+ul.pts li::before{content:"";position:absolute;left:3px;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--violet)}
+.card{background:var(--soft);border-radius:16px;padding:16px 18px;margin:12px 0;break-inside:avoid}
+.card h3{font-size:13pt;margin:0 0 8px}
+.fix{background:var(--warn);color:var(--warn-ink);border-radius:16px;padding:16px 18px;margin:14px 0;break-inside:avoid}
+.fix b{color:var(--warn-ink)}
+.call{background:var(--violet);color:#fff;border-radius:16px;padding:16px 18px;margin:14px 0;break-inside:avoid;font-size:12pt}
+.call b,.call .s{color:#fff}
+
+.map{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.map .card{margin:0}
+.map .who{font-size:13pt;font-weight:700;color:var(--ink)}
+.map .what{margin-top:4px}
+
+.flow{margin:16px 0 8px;display:flex;flex-direction:column;max-width:140mm;break-inside:avoid}
+.step{background:var(--soft);border-radius:14px;padding:12px 16px;display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start}
+.step .n{width:26px;height:26px;border-radius:50%;background:var(--violet);color:#fff;font-weight:700;font-size:10.5pt;display:flex;align-items:center;justify-content:center}
+.step .t{font-weight:700;color:var(--ink);font-size:12pt}
+.step .d{margin-top:2px}
+.step.opt{background:var(--soft2)}
+.step.opt .n{background:var(--ink)}
+.arrow{height:22px;position:relative;margin-left:28px}
+.arrow::before{content:"";position:absolute;left:0;top:0;bottom:7px;width:3px;background:var(--violet);border-radius:2px}
+.arrow::after{content:"";position:absolute;left:-5px;bottom:0;border-left:6.5px solid transparent;border-right:6.5px solid transparent;border-top:8px solid var(--violet)}
+
+table{width:100%;border-collapse:separate;border-spacing:0;margin:12px 0;font-size:10.5pt;break-inside:avoid}
+th{background:var(--ink);color:#fff;text-align:left;font-weight:700;padding:9px 12px}
+th:first-child{border-radius:12px 0 0 0}
+th:last-child{border-radius:0 12px 0 0}
+td{padding:9px 12px;vertical-align:top}
+tr:nth-child(even) td{background:var(--soft)}
+td:first-child{font-weight:700;color:var(--ink);width:26%}
+.money td:last-child,.money th:last-child{text-align:right;white-space:nowrap}
+
+dl.gl{display:grid;grid-template-columns:42mm 1fr;gap:7px 14px;margin:12px 0}
+dl.gl dt{font-weight:700;color:var(--ink)}
+dl.gl dd{margin:0}
+ol.src{margin:12px 0;padding-left:22px;display:grid;gap:5px;font-size:9.2pt}
+ol.src li{padding-left:4px}
+ol.src a{color:var(--violet-ink);word-break:break-all;text-decoration:none}
+ol.src .kind{display:inline-block;background:var(--soft2);color:var(--violet-ink);font-size:7.5pt;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:1px 7px;border-radius:999px;margin-right:4px}
+ol.src .kind.sec{background:#ECECEE;color:#3A3A40}
+
+@media screen{body{padding:24px 16px}}
+</style>
+</head>
+<body>
+<main>
+
+<!-- COVER: one plain title, one sentence, one promise box. Make each document's cover its own. -->
+<section class="cover">
+  <span class="pill">Guide</span>
+  <h1>Plain title that says what this is</h1>
+  <p class="sub">One sentence on what the reader will understand after reading.</p>
+  <div class="promise"><b>Every fact here has a source.</b>The small violet numbers point to the source list on the last page. Anything not confirmed from an official source is in "Ask first".</div>
+</section>
+
+<!-- PART: pill + heading that states the point + optional lead -->
+<section class="part">
+  <span class="pill">Part 1</span>
+  <h2>Heading that states the point</h2>
+  <p class="lead">One line that frames the part. Delete it if the heading already does the job.</p>
+  <ul class="pts">
+    <li><b>Lead-in:</b> the fact in plain words.<span class="s">[1]</span></li>
+    <li><b>Lead-in:</b> the next fact.<span class="s">[2]</span></li>
+  </ul>
+
+  <!-- MAP: who does what, for a reader new to the subject -->
+  <div class="map">
+    <div class="card"><div class="who">Name</div><div class="what">What it does, one sentence.</div></div>
+    <div class="card"><div class="who">Name</div><div class="what">What it does, one sentence.</div></div>
+  </div>
+
+  <!-- FLOW: connected steps for any order or process. Keep it on one page. -->
+  <div class="keep">
+    <h3>The order things happen in</h3>
+    <div class="flow">
+      <div class="step"><div class="n">1</div><div><div class="t">First step</div><div class="d">What happens here.</div></div></div>
+      <div class="arrow"></div>
+      <div class="step"><div class="n">2</div><div><div class="t">Second step</div><div class="d">What happens here.</div></div></div>
+      <div class="arrow"></div>
+      <div class="step opt"><div class="n">+</div><div><div class="t">Optional extras</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="part newpage">
+  <span class="pill">Part 2</span>
+  <h2>Comparison or details</h2>
+
+  <!-- KEY FACT: at most one per part -->
+  <div class="call"><b>The single most important rule in this part.</b><span class="s">[1]</span></div>
+
+  <!-- CORRECTION: only when correcting something said earlier or a common wrong belief -->
+  <div class="fix"><b>Correction.</b> What was believed, what the source actually says, and what changes.</div>
+
+  <!-- TABLE: only for real comparisons -->
+  <table>
+    <tr><th></th><th>Option A</th><th>Option B</th></tr>
+    <tr><td>Row label</td><td>Value</td><td>Value</td></tr>
+    <tr><td>Row label</td><td>Value</td><td>Value</td></tr>
+  </table>
+
+  <!-- CARD: grouped content, with a worked example when a number matters -->
+  <div class="card">
+    <h3>Group title</h3>
+    <ul class="pts">
+      <li><b>Rule:</b> the rule.<span class="s">[2]</span></li>
+      <li><b>Example:</b> real numbers, real math.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="part newpage">
+  <span class="pill">Part 3</span>
+  <h2>Ask first</h2>
+  <p class="lead">Not confirmed from an official source, so not stated as fact.</p>
+  <ul class="pts">
+    <li><b>The open question.</b> Who to ask.</li>
+  </ul>
+
+  <span class="pill" style="margin-top:22px">Part 4</span>
+  <h2>Words you'll hear</h2>
+  <dl class="gl">
+    <dt>Term</dt><dd>Plain meaning in one sentence.</dd>
+  </dl>
+</section>
+
+<section class="part newpage">
+  <span class="pill grey">Sources</span>
+  <h2>Where every fact comes from</h2>
+  <p>Checked on YYYY-MM-DD. Rules and fees can change, so check the official page before acting.</p>
+  <ol class="src">
+    <li><span class="kind">Law</span>Name of the law and sections used. <a href="https://example.org">example.org/path</a></li>
+    <li><span class="kind sec">Guide</span>Publisher, article title, date. <a href="https://example.org">example.org/path</a></li>
+  </ol>
+</section>
+
+</main>
+</body>
+</html>
